@@ -1,0 +1,15 @@
+branch-defaults:
+  default:
+    environment: rf2887-playground1-env
+global:
+  application_name: rf2887-swe-eb-app
+  branch: null
+  default_platform: Python 3.13 running on 64bit Amazon Linux 2023
+  default_region: us-east-1
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  repository: null
+  sc: null
+  workspace_type: Application
