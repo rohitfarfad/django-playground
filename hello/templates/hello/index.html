@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hello World | Playground</title>
+  <style>
+    /* ---- Base styling ---- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* ---- Hello World text ---- */
+    h1 {
+      font-size: 4rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    /* ---- Subtext ---- */
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-top: 10px;
+      color: rgba(255, 255, 255, 0.8);
+      animation: fadeIn 1.8s ease-in-out;
+    }
+
+    /* ---- Floating animation ---- */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ---- Animated background circles ---- */
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.2;
+      animation: float 10s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+      }
+      100% {
+        transform: translateY(0) rotate(360deg);
+      }
+    }
+
+    footer {
+      position: absolute;
+      bottom: 15px;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating circles for subtle animation -->
+  <div class="circle" style="width:120px;height:120px;background:#ffffff;top:10%;left:15%;"></div>
+  <div class="circle" style="width:80px;height:80px;background:#ffb6c1;top:70%;left:70%;animation-delay:2s;"></div>
+  <div class="circle" style="width:100px;height:100px;background:#add8e6;top:50%;left:80%;animation-delay:4s;"></div>
+
+  <h1>Hello, World! 👋</h1>
+  <h2>This is a sample deployment on AWS Elastic Beanstalk</h2>
+  <footer>
+    Created by <strong>Rohit Farfad</strong> (<strong>rf2887</strong>)
+  </footer>
+
+  <script>
+    // Optional: add a gentle pulse animation effect
+    setInterval(() => {
+      document.body.style.background =
+        `linear-gradient(135deg, hsl(${Math.random() * 360}, 70%, 60%), hsl(${Math.random() * 360}, 70%, 60%))`;
+    }, 10000); // changes every 10s
+  </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+.venv/
+venv/
+
+__pychace__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Ignore IDE files
+.idea/
+.vscode/
+.DS_Store
+
+# Ignore local environment configs
+*.env
+.env
