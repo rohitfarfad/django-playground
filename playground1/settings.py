@@ -32,6 +32,8 @@ ALLOWED_HOSTS = ["assignment-dep.us-east-1.elasticbeanstalk.com","127.0.0.1"]
 
 INSTALLED_APPS = [
     'hello',
+    'polls.apps.PollsConfig',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -105,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'EST'
 
 USE_I18N = True
 
