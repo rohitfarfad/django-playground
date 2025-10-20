@@ -1,7 +1,9 @@
-# .travis.yml
+os: linux
+dist: jammy
 language: python
 python:
   - "3.11"
+
 cache: pip
 
 install:
@@ -12,7 +14,6 @@ env:
     - DJANGO_SETTINGS_MODULE=playground1.settings
     - PYTHONUNBUFFERED=1
 
-# keep CI simple: use sqlite (your settings should only select RDS when RDS_* env vars exist)
 script:
   - python manage.py test -v 2
 
@@ -22,12 +23,12 @@ branches:
 
 deploy:
   provider: elasticbeanstalk
-  edge: true                       # dpl v2
+  edge: true
   access_key_id: $AWS_ACCESS_KEY_ID
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   region: $AWS_REGION
   app: $EB_APP_NAME
   env: $EB_ENV_NAME
-  bucket: $EB_BUCKET               # EB’s application-versions bucket
+  bucket: $EB_BUCKET
   on:
-    branch: main                   # deploy only from main when tests pass
+    branch: main
