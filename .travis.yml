@@ -1,5 +1,6 @@
 os: linux
 dist: jammy
+
 language: python
 python:
   - "3.11"
@@ -8,18 +9,31 @@ cache: pip
 
 install:
   - pip install -r requirements.txt
+  - pip install black flake8 coverage coveralls
 
 env:
   global:
-    - DJANGO_SETTINGS_MODULE=playground1.settings
+    - DJANGO_SETTINGS_MODULE=playground1.settings   # <-- set to your package
     - PYTHONUNBUFFERED=1
 
 script:
-  - python manage.py test -v 2
+  # 1) formatting & lint
+  - black --check .
+  - flake8 .
+  # 2) tests with coverage
+  - coverage run manage.py test -v 2
+  - coverage report -m
+
+# send coverage to Coveralls for visibility
+after_success:
+  - coveralls
 
 branches:
   only:
     - main
+
+# prevent deploys from PR builds
+if: branch = main AND type != pull_request
 
 deploy:
   provider: elasticbeanstalk
@@ -29,6 +43,6 @@ deploy:
   region: $AWS_REGION
   app: $EB_APP_NAME
   env: $EB_ENV_NAME
-  bucket: $EB_BUCKET
+  bucket: $EB_BUCKET          # optional; omit to auto-detect EB bucket
   on:
     branch: main

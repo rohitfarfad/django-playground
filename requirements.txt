@@ -33,3 +33,7 @@ urllib3==1.26.20
 wcwidth==0.2.14
 wrapt==1.17.3
 psycopg2-binary
+black
+flake8
+coverage
+coveralls
