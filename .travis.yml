@@ -1,0 +1,33 @@
+# .travis.yml
+language: python
+python:
+  - "3.11"          # stable on Travis; fine even if EB runs 3.13
+cache: pip
+
+install:
+  - pip install -r requirements.txt
+
+env:
+  global:
+    - DJANGO_SETTINGS_MODULE=<your_project>.settings
+    - PYTHONUNBUFFERED=1
+
+# keep CI simple: use sqlite (your settings should only select RDS when RDS_* env vars exist)
+script:
+  - python manage.py test -v 2
+
+branches:
+  only:
+    - main
+
+deploy:
+  provider: elasticbeanstalk
+  edge: true                       # dpl v2
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  region: $AWS_REGION
+  app: $EB_APP_NAME
+  env: $EB_ENV_NAME
+  bucket: $EB_BUCKET               # EB’s application-versions bucket
+  on:
+    branch: main                   # deploy only from main when tests pass
