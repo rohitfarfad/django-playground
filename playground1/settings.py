@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
+#http://assignment-dep.us-east-1.elasticbeanstalk.com/
 
 from pathlib import Path
 import os
@@ -86,6 +87,17 @@ DATABASES = {
 
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ.get('DB_NAME', 'postgres'),
+#         'USER': os.environ.get('DB_USER', 'ebroot'),
+#         'PASSWORD': os.environ.get('DB_PASSWORD', 'HCaeurWwsXf03Bn'),
+#         'HOST': os.environ.get('DB_HOST', 'django-playground-db.csjugu6uiakv.us-east-1.rds.amazonaws.com'),
+#         'PORT': os.environ.get('DB_PORT', '5432'),
+#     }
+# }
 
 
 # Password validation
