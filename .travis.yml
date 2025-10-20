@@ -1,7 +1,7 @@
 # .travis.yml
 language: python
 python:
-  - "3.11"          # stable on Travis; fine even if EB runs 3.13
+  - "3.11"
 cache: pip
 
 install:
@@ -9,7 +9,7 @@ install:
 
 env:
   global:
-    - DJANGO_SETTINGS_MODULE=<your_project>.settings
+    - DJANGO_SETTINGS_MODULE=playground1.settings
     - PYTHONUNBUFFERED=1
 
 # keep CI simple: use sqlite (your settings should only select RDS when RDS_* env vars exist)

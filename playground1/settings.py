@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-c7bogs#-(q_f410(=m9kxd+(1ykat%if2pk9skchciok4#kva6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["assignment-dep.us-east-1.elasticbeanstalk.com","127.0.0.1"]
+ALLOWED_HOSTS = ["assignment-dep1.us-east-1.elasticbeanstalk.com","127.0.0.1"]
 
 
 # Application definition
@@ -75,18 +75,37 @@ WSGI_APPLICATION = 'playground1.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'ebroot',
-        'PASSWORD': 'HCaeurWwsXf03Bn',
-        'HOST': 'django-playground-db.csjugu6uiakv.us-east-1.rds.amazonaws.com',
-        'PORT': '5432',
-
+if all(k in os.environ for k in ["RDS_HOSTNAME", "RDS_PORT", "RDS_DB_NAME", "RDS_USERNAME", "RDS_PASSWORD"]):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            "NAME": os.environ["RDS_DB_NAME"],
+            "USER": os.environ["RDS_USERNAME"],
+            "PASSWORD": os.environ["RDS_PASSWORD"],
+            "HOST": os.environ["RDS_HOSTNAME"],
+            "PORT": os.environ["RDS_PORT"],
+            "OPTIONS": {"sslmode": "require"},
+    
+        }
     }
-}
+elif os.getenv("DATABASE_URL"):
+    # Optional: enable dj-database-url if you like
+    # pip install dj-database-url
+    import dj_database_url
+    DATABASES = {
+        "default": dj_database_url.config(
+            default=os.environ["DATABASE_URL"],
+            conn_max_age=600,
+            ssl_require=True,
+        )
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 # DATABASES = {
 #     'default': {
