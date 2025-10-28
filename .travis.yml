@@ -32,8 +32,6 @@ branches:
   only:
     - main
 
-# prevent deploys from PR builds
-if: branch = main AND type != pull_request
 
 deploy:
   provider: elasticbeanstalk
